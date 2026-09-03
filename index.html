@@ -429,6 +429,7 @@ section{position:relative}
   .stat-block{grid-template-columns:1fr;gap:20px}
   .proof-video{min-height:260px}
   .story-visual{aspect-ratio:16/10}
+  .foot-top{grid-template-columns:1fr 1fr}
 }
 @media(max-width:640px){
   .nav-links{display:none}
@@ -441,7 +442,16 @@ section{position:relative}
   .hero{padding-top:60px}
   .hero-strip{gap:24px}
   .quote-card,.stat-block,.proc-footer,.proof-copy,.form-card,.modal-card{padding-left:26px;padding-right:26px}
-  .stat-block .big{font-size:46px}
+  .stat-block .big{font-size:38px;white-space:normal}
+  .foot-top{grid-template-columns:1fr}
+}
+@media(max-width:420px){
+  .nav-in{min-height:70px;height:auto;padding:10px 0}
+  .brand{font-size:15px;gap:8px}
+  .brand .mark{height:30px}
+  .nav-right{gap:8px}
+  .nav-cta{padding:9px 14px;font-size:12.5px}
+  .burger{padding:6px}
 }
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
