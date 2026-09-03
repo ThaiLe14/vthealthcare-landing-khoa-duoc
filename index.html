@@ -365,6 +365,28 @@ section{position:relative}
 .form-ok .ok-ic{width:60px;height:60px;border-radius:50%;background:var(--teal-wash);display:grid;place-items:center;margin:0 auto 18px;color:var(--teal-dark)}
 .form-ok h3{margin-bottom:8px}
 .form-ok p{font-size:15px;color:var(--ink-soft)}
+.form-ok .btn-ghost{margin-top:18px}
+.form-error{display:none;color:#c0392b;font-size:13.5px;margin:-6px 0 4px}
+
+/* ---------- CONTACT MODAL ---------- */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(10,26,30,.55);backdrop-filter:blur(3px);
+  padding:24px;align-items:center;justify-content:center;overflow-y:auto;
+}
+.modal-overlay.open{display:flex}
+.modal-card{
+  position:relative;background:#fff;border-radius:22px;padding:38px 36px;
+  box-shadow:0 40px 90px -40px rgba(0,30,60,.6);
+  max-width:480px;width:100%;margin:auto;
+}
+.modal-close{
+  position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;
+  border:0;background:var(--teal-wash);color:var(--teal-dark);cursor:pointer;
+  display:grid;place-items:center;transition:.18s;
+}
+.modal-close:hover{background:var(--teal-soft)}
+.modal-close svg{width:16px;height:16px}
 
 /* ---------- FOOTER ---------- */
 .foot{background:#0a1f24;color:rgba(255,255,255,.75);padding:56px 0 30px}
@@ -418,7 +440,7 @@ section{position:relative}
   .eco-arrow{transform:rotate(90deg);padding:4px 0}
   .hero{padding-top:60px}
   .hero-strip{gap:24px}
-  .quote-card,.stat-block,.proc-footer,.proof-copy,.form-card{padding-left:26px;padding-right:26px}
+  .quote-card,.stat-block,.proc-footer,.proof-copy,.form-card,.modal-card{padding-left:26px;padding-right:26px}
   .stat-block .big{font-size:46px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -445,7 +467,7 @@ section{position:relative}
     </nav>
     <div class="nav-right">
       <a href="tel:02873068009" class="nav-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.8 2z"/></svg><span>028 7306 8009</span></a>
-      <a href="#contact" class="nav-cta">Tư vấn miễn phí</a>
+      <a href="#contact" class="nav-cta open-contact">Tư vấn miễn phí</a>
     </div>
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -462,7 +484,7 @@ section{position:relative}
         <h1>Khoa Dược của bạn không thiếu người. <span class="hl">Khoa Dược của bạn cần một cách vận hành khác.</span></h1>
         <p class="hero-sub">Đằng sau mỗi đơn thuốc là hàng chục thao tác lặp lại. Hãy để công nghệ đảm nhận những công việc đó. Dược sĩ tập trung nhiều hơn vào chuyên môn, chăm sóc và tư vấn người bệnh.</p>
         <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary">Tư vấn miễn phí</a>
+          <a href="#contact" class="btn btn-primary open-contact">Tư vấn miễn phí</a>
           <a href="#proof" class="btn btn-ghost">Xem hệ thống vận hành thực tế</a>
         </div>
       </div>
@@ -706,7 +728,7 @@ section{position:relative}
         <b>Thường kéo dài 3–6 tháng</b>
         <p>Từ khi triển khai đến khi tối ưu hóa quy trình — vì đây là thay đổi cả một quy trình vận hành, không chỉ là lắp một thiết bị.</p>
       </div>
-      <a href="#contact" class="btn btn-primary">Nhận lộ trình triển khai mẫu</a>
+      <a href="#contact" class="btn btn-primary open-contact">Nhận lộ trình triển khai mẫu</a>
     </div>
   </div>
 </section>
@@ -774,7 +796,7 @@ section{position:relative}
         <span class="eyebrow">Minh chứng thực tế</span>
         <h2>Bệnh viện Đa khoa Quốc tế SIS Cần Thơ. Minh chứng cho một quy trình vận hành mới.</h2>
         <p>Video ghi lại quy trình vận hành thực tế của hệ thống cấp phát thuốc tự động — minh họa cách một quy trình được tự động hóa có thể nâng cao hiệu quả vận hành, giảm rủi ro trong cấp phát và tối ưu trải nghiệm người bệnh.</p>
-        <a href="#contact" class="btn btn-primary">Đặt lịch tham quan thực tế</a>
+        <a href="#contact" class="btn btn-primary open-contact">Đặt lịch tham quan thực tế</a>
       </div>
       <div class="proof-video">
         <iframe src="https://www.youtube.com/embed/gheOwnGw1p0" title="Hệ thống cấp phát thuốc tự động — SIS Cần Thơ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
@@ -823,25 +845,13 @@ section{position:relative}
           <a href="mailto:contact@vthealthcare.vn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>contact@vthealthcare.vn</a>
           <a href="https://zalo.me/2286304200256852202" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.8 2 10.5c0 2.7 1.5 5.1 3.8 6.6-.2.8-.7 2.1-1.4 3.1-.2.3.1.7.4.6 1.9-.6 3.3-1.4 4.1-1.9.9.2 2 .4 3.1.4 5.5 0 10-3.8 10-8.5S17.5 2 12 2z"/></svg>Chat Zalo</a>
         </div>
-          <p class="fsub">Chúng tôi sẽ liên hệ trong vòng 1 ngày làm việc.</p>
-          <div class="field"><label>Họ tên</label><input type="text" placeholder="Nguyễn Văn A"></div>
-          <div class="field row2">
-            <div><label>Chức vụ</label><input type="text" placeholder="Trưởng khoa Dược"></div>
-            <div><label>Bệnh viện / Đơn vị</label><input type="text" placeholder="BV Đa khoa..."></div>
-          </div>
-          <div class="field row2">
-            <div><label>Số điện thoại</label><input type="tel" placeholder="09xx xxx xxx"></div>
-            <div><label>Email</label><input type="email" placeholder="ten@benhvien.vn"></div>
-          </div>
-          <div class="field"><label>Nhu cầu <span style="font-weight:400;color:var(--ink-soft)">(tùy chọn)</span></label><textarea rows="2" placeholder="Ví dụ: cần giảm thời gian chờ ở quầy ngoại trú..."></textarea></div>
-          <button class="btn btn-primary" id="submitBtn">Đăng ký khảo sát quy trình</button>
-          <p class="form-alt">Hoặc <a href="#">đặt lịch demo</a> · <a href="#">trao đổi cùng chuyên viên</a></p>
-        </div>
-        <div class="form-ok" id="formOk">
-          <div class="ok-ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
-          <h3>Đã nhận đăng ký</h3>
-          <p>Cảm ơn bạn. Đội ngũ VT healthcare sẽ liên hệ trong vòng 1 ngày làm việc để sắp xếp buổi khảo sát.</p>
-        </div>
+      </div>
+      <div class="form-card reveal">
+        <h3>Đăng ký khảo sát quy trình</h3>
+        <p class="fsub">Điền thông tin, chuyên gia VT healthcare sẽ liên hệ trong vòng 1 ngày làm việc để sắp xếp buổi khảo sát.</p>
+        <button class="btn btn-primary open-contact" type="button">Đăng ký khảo sát quy trình</button>
+        <p class="form-alt">Không cam kết mua · Miễn phí khảo sát ban đầu</p>
+      </div>
       </div>
     </div>
   </div>
@@ -890,6 +900,39 @@ section{position:relative}
   </div>
 </footer>
 
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactOverlay" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Đóng">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="modalFormWrap">
+      <h3 id="modalTitle">Đăng ký khảo sát quy trình</h3>
+      <p class="fsub">Chúng tôi sẽ liên hệ trong vòng 1 ngày làm việc.</p>
+      <form id="surveyForm" autocomplete="off">
+        <div class="field"><label>Họ tên</label><input type="text" name="name" placeholder="Nguyễn Văn A" required></div>
+        <div class="field row2">
+          <div><label>Chức vụ</label><input type="text" name="position" placeholder="Trưởng khoa Dược" required></div>
+          <div><label>Bệnh viện / Đơn vị</label><input type="text" name="hospital" placeholder="BV Đa khoa..." required></div>
+        </div>
+        <div class="field row2">
+          <div><label>Số điện thoại</label><input type="tel" name="phone" placeholder="09xx xxx xxx" required></div>
+          <div><label>Email</label><input type="email" name="email" placeholder="ten@benhvien.vn" required></div>
+        </div>
+        <div class="field"><label>Nhu cầu <span style="font-weight:400;color:var(--ink-soft)">(tùy chọn)</span></label><textarea rows="2" name="need" placeholder="Ví dụ: cần giảm thời gian chờ ở quầy ngoại trú..."></textarea></div>
+        <p class="form-error" id="formError"></p>
+        <button class="btn btn-primary" id="submitBtn" type="submit">Đăng ký khảo sát quy trình</button>
+      </form>
+    </div>
+    <div class="form-ok" id="formOk">
+      <div class="ok-ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Đã nhận đăng ký</h3>
+      <p>Cảm ơn bạn. Đội ngũ VT healthcare sẽ liên hệ trong vòng 1 ngày làm việc để sắp xếp buổi khảo sát.</p>
+      <button class="btn btn-ghost" id="modalOkClose" type="button">Đóng</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // Q&A accordion
 document.querySelectorAll('.qa-q').forEach(function(btn){
@@ -908,12 +951,73 @@ document.querySelectorAll('.qa-q').forEach(function(btn){
   });
 });
 
-// Form
-var sb=document.getElementById('submitBtn');
-if(sb){sb.addEventListener('click',function(){
-  document.getElementById('formBody').style.display='none';
-  document.getElementById('formOk').classList.add('show');
-});}
+// Contact modal
+var overlay=document.getElementById('contactOverlay');
+var modalFormWrap=document.getElementById('modalFormWrap');
+var modalOk=document.getElementById('formOk');
+var surveyForm=document.getElementById('surveyForm');
+var formError=document.getElementById('formError');
+var submitBtn=document.getElementById('submitBtn');
+
+function openContactModal(){
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  modalFormWrap.style.display='';
+  modalOk.classList.remove('show');
+  formError.style.display='none';
+  surveyForm.reset();
+}
+function closeContactModal(){
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.open-contact').forEach(function(el){
+  el.addEventListener('click',function(e){ e.preventDefault(); openContactModal(); });
+});
+document.getElementById('modalClose').addEventListener('click',closeContactModal);
+document.getElementById('modalOkClose').addEventListener('click',closeContactModal);
+overlay.addEventListener('click',function(e){ if(e.target===overlay) closeContactModal(); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape' && overlay.classList.contains('open')) closeContactModal(); });
+
+surveyForm.addEventListener('submit',function(e){
+  e.preventDefault();
+  var data={
+    name:surveyForm.name.value.trim(),
+    position:surveyForm.position.value.trim(),
+    hospital:surveyForm.hospital.value.trim(),
+    phone:surveyForm.phone.value.trim(),
+    email:surveyForm.email.value.trim(),
+    need:surveyForm.need.value.trim()
+  };
+  if(!data.name||!data.phone){
+    formError.textContent='Vui lòng nhập Họ tên và Số điện thoại.';
+    formError.style.display='block';
+    return;
+  }
+  formError.style.display='none';
+  submitBtn.disabled=true;
+  submitBtn.textContent='Đang gửi...';
+  fetch('/api/submit',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(data)
+  }).then(function(res){ return res.json().then(function(json){ return {ok:res.ok,json:json}; }); })
+    .then(function(r){
+      if(!r.ok||!r.json.ok){ throw new Error((r.json&&r.json.error)||'Lỗi gửi form'); }
+      modalFormWrap.style.display='none';
+      modalOk.classList.add('show');
+    })
+    .catch(function(){
+      formError.textContent='Có lỗi xảy ra, vui lòng thử lại hoặc gọi 028 7306 8009.';
+      formError.style.display='block';
+    })
+    .finally(function(){
+      submitBtn.disabled=false;
+      submitBtn.textContent='Đăng ký khảo sát quy trình';
+    });
+});
 
 // Reveal on scroll
 var io=new IntersectionObserver(function(entries){
