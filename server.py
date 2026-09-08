@@ -43,11 +43,15 @@ def init_db():
             hospital TEXT,
             phone TEXT NOT NULL,
             email TEXT,
+            outpatient_visits INTEGER,
             need TEXT,
             ip TEXT
         )
         """
     )
+    existing_cols = {row[1] for row in conn.execute("PRAGMA table_info(submissions)")}
+    if "outpatient_visits" not in existing_cols:
+        conn.execute("ALTER TABLE submissions ADD COLUMN outpatient_visits INTEGER")
     conn.commit()
     conn.close()
 
@@ -111,6 +115,17 @@ class Handler(BaseHTTPRequestHandler):
         email = str(data.get("email", "")).strip()[:200]
         need = str(data.get("need", "")).strip()[:2000]
 
+        outpatient_visits_raw = str(data.get("outpatientVisits", "")).strip()
+        outpatient_visits = None
+        if outpatient_visits_raw:
+            try:
+                outpatient_visits = int(outpatient_visits_raw)
+                if outpatient_visits < 0:
+                    raise ValueError
+            except ValueError:
+                self._send_json(400, {"ok": False, "error": "invalid outpatientVisits"})
+                return
+
         if not name or not phone:
             self._send_json(400, {"ok": False, "error": "missing name or phone"})
             return
@@ -118,8 +133,8 @@ class Handler(BaseHTTPRequestHandler):
         conn = sqlite3.connect(DB_PATH)
         conn.execute(
             "INSERT INTO submissions "
-            "(created_at, name, position, hospital, phone, email, need, ip) "
-            "VALUES (?,?,?,?,?,?,?,?)",
+            "(created_at, name, position, hospital, phone, email, outpatient_visits, need, ip) "
+            "VALUES (?,?,?,?,?,?,?,?,?)",
             (
                 datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 name,
@@ -127,6 +142,7 @@ class Handler(BaseHTTPRequestHandler):
                 hospital,
                 phone,
                 email,
+                outpatient_visits,
                 need,
                 self.client_address[0],
             ),

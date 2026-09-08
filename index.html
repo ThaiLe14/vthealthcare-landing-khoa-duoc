@@ -929,6 +929,7 @@ section{position:relative}
           <div><label>Số điện thoại</label><input type="tel" name="phone" placeholder="09xx xxx xxx" required></div>
           <div><label>Email</label><input type="email" name="email" placeholder="ten@benhvien.vn" required></div>
         </div>
+        <div class="field"><label>Số lượt khám ngoại trú mỗi ngày <span style="font-weight:400;color:var(--ink-soft)">(tùy chọn)</span></label><input type="number" name="outpatientVisits" min="0" step="1" placeholder="Ví dụ: 300"></div>
         <div class="field"><label>Nhu cầu <span style="font-weight:400;color:var(--ink-soft)">(tùy chọn)</span></label><textarea rows="2" name="need" placeholder="Ví dụ: cần giảm thời gian chờ ở quầy ngoại trú..."></textarea></div>
         <p class="form-error" id="formError"></p>
         <button class="btn btn-primary" id="submitBtn" type="submit">Đăng ký khảo sát quy trình</button>
@@ -999,6 +1000,7 @@ surveyForm.addEventListener('submit',function(e){
     hospital:surveyForm.hospital.value.trim(),
     phone:surveyForm.phone.value.trim(),
     email:surveyForm.email.value.trim(),
+    outpatientVisits:surveyForm.outpatientVisits.value.trim(),
     need:surveyForm.need.value.trim()
   };
   if(!data.name||!data.phone){
